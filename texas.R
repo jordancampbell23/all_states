@@ -21,6 +21,7 @@ reported <- closed_schools |>
     `School Type` == "REGULAR INSTRUCTIONAL",
     Charter == "Not a charter"
   ) |>
+  filter(!str_detect(`School Name`, regex("Academy|Shelter", ignore_case = TRUE))) |>
   mutate(YEAR = as.numeric(str_extract(`Removal Date`, "\\d{4}")))
 
 
