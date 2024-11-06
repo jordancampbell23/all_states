@@ -8,12 +8,15 @@ library(stringr)
 #   - Does not seem to include FY18 closures
 #   - Innovations K-8 looked like an alternative school to me
 
-data <- read_excel("data/School_data.xlsx") |>
+school_closures <- read_excel("data/School_data.xlsx") |>
   mutate(fy = year(date_closed) + ifelse(month(date_closed) >= 7, 1, 0)) |>
   filter(school_type == "Regular Education") |>
   filter(charter_flag == 0) |>
-  filter(!str_detect(school_name, "Online")) |>
+  filter(!str_detect(school_name, "Online|Virtual")) |>
   select(fy, everything())
+
+# Flagged schools
+#   - Innovations K-8 (closed, but may be alternative/charter)
 
 closures_by_year <- data %>%
   group_by(fy) %>%

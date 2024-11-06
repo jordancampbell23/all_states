@@ -28,8 +28,12 @@ closed_schools <- closed_schools |>
   filter(
     `Charter School (Y/N)` == "N",
     `School Type` == "Regular"
+  ) |>
+  filter(
+    !str_detect(`School Name`, regex("Toland", ignore_case = TRUE))
   )
-
+  
+# Toland, Helen Anderson ES is a magnet, never closed based off call
 
 closed_schools_by_year <- closed_schools |>
   group_by(fy) |>

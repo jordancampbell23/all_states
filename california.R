@@ -19,15 +19,22 @@ library(openxlsx)
 #        (Assume this one also combined into the larger school)
 #
 #       - STUDIO ???
-#d
+#
 #       - INDEPENDENT STUDY PROGRAM
+
 #       - SCHOOL OF SOCIAL JUSTICE AT SONIA SOTOMAYOR LEARNING ACADEMIES
+
 #       - MT. GEORGE INTERNATIONAL
+
 #       - CAMPBELL DISTANCE LEARNING
+
 #       - AUGUSTUS F. HAWKINS HIGH C RESPONSIBLE INDIGENOUS SOCIAL ENTREPRENEURSHIP
+
 #       - AUGUSTUS F. HAWKINS HIGH B COMMUNITY HEALTH ADVOCATES
 #       - PARKER
+
 #       - RISE COMMUNITY ELEMENTARY
+#         (Seems like a traditional public school)
 
 
 # Read the data
@@ -53,7 +60,7 @@ data <- data |>
 # Filter out charters and specific terms from the school names
 data <- data |>
   mutate(School = toupper(School)) |>
-  filter(!str_detect(School, "CHARTER|ACADEMY|KIPP|VIRTUAL|ONLINE")) |>
+  filter(!str_detect(School, "CHARTER|ACADEMY|KIPP|VIRTUAL|ONLINE|EARLY CHILDHOOD DEVELOPMENT|DISTANCE")) |>
   filter(SOCType != "Preschool")
 
 

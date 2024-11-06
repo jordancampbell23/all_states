@@ -27,7 +27,7 @@ closed_schools <- data |>
   filter(PRIMARY_SERV_TYPE == "R") |>
   filter(GRADE_CODE != 1) |>
   filter(
-    !str_detect(SCHOOL_NAME_LONG, regex("SUMMER", ignore_case = TRUE))
+    !str_detect(SCHOOL_NAME_LONG, regex("SUMMER|COLLEGE AND CAREERS", ignore_case = TRUE))
   )
 
 

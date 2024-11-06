@@ -19,9 +19,15 @@ data24 <- read_excel("data/TNSD Closures.xlsx", sheet = "2024  Closures") |>
 # merge all the data
 data <- bind_rows(data21, data22, data23, data24)
 
+# Questions:
+#   - Achievement School District
+
 
 school_closures <- data |>
   filter(`School Type` == "Public") |>
+  filter(
+    !str_detect(`SCHOOL NAME`, regex("Adult High School|KIPP", ignore_case = TRUE))
+  ) |>
   select(fy, everything())
 
 

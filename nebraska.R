@@ -21,12 +21,24 @@ closed_schools <- data |>
 # enrollment <- enrollment |>
 #   mutate(fy = as.numeric(fy))
 
+# Summerland previously three districts, now just Summerland - Built a new facility
+# CEDAR BLUFFS MIDDLE SCHOOL, claims they've always been one building
+# Lincon Public Schools callled back, no PACT... https://home.lps.org/federal/family-literacy/
+# Oakland Craig Public Schools say they didn't close the Jr High
+# St Paul has always been within one building, 
+# Weping Water Middle School, says they didn't close
+
+
+
 closed_schools <- closed_schools |>
   mutate(
     # extract last 4 digits
     fy = str_extract(DATAYEARS, "\\d{4}$")
   ) |>
   mutate(fy = as.numeric(fy)) |>
+  filter(!str_detect(SCHOOL, "PRESCHOOL|INFANT|ED CENTER|PRE-SCHOOL|HEAD START|EARLY EDUCATION CENTER|CENTRAL VALLEY PK - WOLBACH|PACT|ST PAUL")) |>
+  filter(DISTRICT != "SOUTH CENTRAL NEBRASKA UNIFIED 5") |>
+  filter(DISTRICT != "SUMMERLAND PUBLIC SCHOOLS") |>
   # left_join(enrollment, by = c("SCHOOLID" = "CO_DIST_SCH", "fy" = "fy")) |>
   filter(CLOSED == "x") # |>
   # filter(!is.na(total))
